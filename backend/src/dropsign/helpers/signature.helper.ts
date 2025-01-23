@@ -1,7 +1,10 @@
 import axios from 'axios';
 import * as FormData from 'form-data';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-const API_KEY = process.env.DROPBOX_SIGN_API_KEY || '209937fe7af52c35dc291e7a69b72c4956ac4968c98a7fba607337b77bbf08d1'; // Replace with your Dropbox Sign API key
+const API_KEY = process.env.DROPBOX_SIGN_API_KEY;
+// console.log(API_KEY);
 const DROPBOX_SIGN_API_URL = 'https://api.hellosign.com/v3'; // Dropbox Sign API endpoint
 
 export async function createSignatureRequest({ participants, base64Content }) {
@@ -54,3 +57,4 @@ export async function createSignatureRequest({ participants, base64Content }) {
     throw new Error(`Failed to send signature request: ${error.response?.data?.error || error.message}`);
   }
 }
+

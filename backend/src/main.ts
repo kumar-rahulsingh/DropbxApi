@@ -1,15 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { json, urlencoded } from 'express';
-import * as dotenv from 'dotenv'; // Import dotenv
-
-dotenv.config(); // Load environment variables from .env file
+import * as dotenv from 'dotenv'; 
+dotenv.config(); 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: process.env.FRONTEND_URL,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
@@ -17,7 +16,7 @@ async function bootstrap() {
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ limit: '50mb', extended: true }));
 
-  const port = process.env.PORT || 4000;
+  const port = process.env.PORT;
   await app.listen(port);
   console.log(`Server running on http://localhost:${port}`);
 }

@@ -9,7 +9,7 @@ export default function Form() {
     const [file, setFile] = useState(null);
     const [isClient, setIsClient] = useState(false);
 
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:4000/api/dropsign"; // Default backend URL
 
     useEffect(() => {
         setIsClient(true);

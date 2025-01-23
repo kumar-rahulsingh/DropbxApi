@@ -27,4 +27,3 @@ export class DropsignEntity {
   createdAt: Date;
 }
 
-

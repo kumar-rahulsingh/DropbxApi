@@ -1,4 +1,4 @@
-import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, HttpException } from '@nestjs/common';
 import { DropsignService } from './dropsign.service';
 
 @Controller('api/dropsign')
@@ -11,12 +11,12 @@ export class DropsignController {
 
     // Validate participants
     if (!participants || !Array.isArray(participants) || participants.length === 0) {
-      throw new HttpException('Participants are required', HttpStatus.BAD_REQUEST);
+      throw new HttpException('Participants are required', 400);  
     }
 
     // Validate file
     if (!file) {
-      throw new HttpException('File is required', HttpStatus.BAD_REQUEST);
+      throw new HttpException('File is required', 400);  
     }
 
     try {
@@ -30,7 +30,7 @@ export class DropsignController {
       console.error('Error in sendSignatureRequest:', error.message);
       throw new HttpException(
         `Error sending signature request: ${error.message}`,
-        HttpStatus.INTERNAL_SERVER_ERROR,
+        500,  
       );
     }
   }
